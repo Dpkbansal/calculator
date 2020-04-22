@@ -6,11 +6,6 @@ buttonsInput.forEach((button) => {
         let display = document.querySelector(".display");
         display.textContent = input;
     });
-    button.addEventListener('touchstart',function(){
-        input += button.id;
-        let display = document.querySelector(".display");
-        display.textContent = input;
-    });
 })
 
 window.addEventListener('keydown',function(e){
@@ -24,14 +19,6 @@ window.addEventListener('keydown',function(e){
 
 let buttonBackspace = document.querySelector(".back");
 buttonBackspace.addEventListener('click',function(){
-    let inputArray = Array.from(input);
-    let splice = inputArray.splice((inputArray.length-1),1);
-    input = inputArray.join("");
-    let display = document.querySelector(".display");
-    display.textContent = input;
-})
-
-buttonBackspace.addEventListener('touchstart',function(){
     let inputArray = Array.from(input);
     let splice = inputArray.splice((inputArray.length-1),1);
     input = inputArray.join("");
@@ -53,11 +40,6 @@ window.addEventListener('keydown',function(e){
 
 let buttonClear = document.querySelector(".clear");
 buttonClear.addEventListener('click',function(){
-    input="";
-    let display = document.querySelector(".display");
-    display.textContent = input;
-})
-buttonClear.addEventListener('touchstart',function(){
     input="";
     let display = document.querySelector(".display");
     display.textContent = input;
@@ -128,7 +110,6 @@ function operate(){
 
 let equalButton = document.querySelector(".equal");
 equalButton.addEventListener('click',operate);
-equalButton.addEventListener('touchstart',operate);
 
 window.addEventListener('keydown',function(e){
     if(e.key == "Enter"){

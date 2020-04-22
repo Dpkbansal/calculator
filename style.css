@@ -29,15 +29,15 @@ button{
 }
 @media (max-width: 500px){
     .buttonsGrid{
-        width : 50vw;
-        height : 50vh;
-        margin : -25vh auto auto -25vw;
+        width : 70vw;
+        height : 60vh;
+        margin : -30vh auto auto -35vw;
     }
 }
 @media (max-width: 800px){
     .buttonsGrid{
-        width : 34vw;
+        width : 60vw;
         height : 50vh;
-        margin : -25vh auto auto -17vw;
+        margin : -25vh auto auto -30vw;
     }
 }
