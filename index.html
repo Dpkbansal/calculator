@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        .buttonsGrid{
+            display: grid;
+            grid-template: repeat(6,auto)/repeat(4,1fr);
+            position: absolute;
+            width : 20vw;
+            height: 50vh;
+            top: 50vh;
+            left: 50vw;
+            margin : -25vh auto auto -10vw;
+            border: 5px solid black;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: lightslategray;
+        }
+        button{
+            background-color : lightgray;
+            border: 2px solid gray;
+            border-radius: 5px;
+            font-size: large;
+        }
+        .display{
+            grid-area:1/1/2/5;
+            height: 15vh;
+            border: 2px solid black;
+            border-radius: 5px;
+            align-self: center;
+            background-color: white;
+            font-size: large;
+        }
+    </style>
+    <body>
+        <div class="buttonsGrid">
+            <div class="display"></div>
+            <button class="clear">C</button>
+            <button class="power" id="^">^</button>
+            <button class="percentage">%</button>
+            <button class="divide operator" id="/">/</button>
+            <button class="seven input" id="7">7</button>
+            <button class="eight input" id="8">8</button>
+            <button class="nine input" id="9">9</button>
+            <button class="multiply operator" id="*">*</button>
+            <button class="four input" id="4">4</button>
+            <button class="five input" id="5">5</button>
+            <button class="six input" id="6">6</button>
+            <button class="subtract operator" id="-">-</button>
+            <button class="one input" id="1">1</button>
+            <button class="two input" id="2">2</button>
+            <button class="three input" id="3">3</button>
+            <button class="add operator" id="+">+</button>
+            <button class="decimal" id=".">.</button>
+            <button class="zero input" id="0">0</button>
+            <button class="back">bck</button>
+            <button class="equal">=</button>
+        </div>
+    </body>
+    <script>
+
+        let input = "";
+        let buttonsInput = document.querySelectorAll('button');
+        buttonsInput.forEach((button) => {
+            button.addEventListener('click',function(){
+                input += button.id;
+                let display = document.querySelector(".display");
+                display.textContent = input;
+            });
+        })
+
+        window.addEventListener('keydown',function(e){
+            if(e.key>=0 && e.key<=9 || e.key=="*" || e.key =="-" || e.key =="+" || e.key =="/" || e.key == "." || e.key == "^"){
+                input += e.key;
+            }
+                let display = document.querySelector(".display");
+                display.textContent = input;
+        })
+
+
+        let buttonBackspace = document.querySelector(".back");
+        buttonBackspace.addEventListener('click',function(){
+            let inputArray = Array.from(input);
+            let splice = inputArray.splice((inputArray.length-1),1);
+            input = inputArray.join("");
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Backspace"){
+            let inputArray = Array.from(input);
+            let splice = inputArray.splice((inputArray.length-1),1);
+            input = inputArray.join("");
+            let display = document.querySelector(".display");
+            display.textContent = input;
+            }
+        })
+
+
+
+        let buttonClear = document.querySelector(".clear");
+        buttonClear.addEventListener('click',function(){
+            input="";
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Escape"){
+                input="";
+            }
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+
+        function operate(){
+            let inputArray = Array.from(input);
+            let input1 =0;
+            let input2 =0;
+            let inputOperator =0;
+            for(let i=inputArray.length-1;i>=0;i--){
+                if(inputArray[i]=="+" || inputArray[i]=="-" || inputArray[i]=="*" || inputArray[i]=="/" || inputArray[i]=="^"){
+                    input2 = parseFloat(inputArray.splice(i+1,(inputArray.length-i)).join(""));
+                    input1 = parseFloat(inputArray.splice(0,i).join(""));
+                    inputOperator = inputArray.join("");
+                    break;
+                }
+                else{
+                    let display = document.querySelector(".display");
+                    display.textContent = input+"="+input;
+                }
+            }
+            switch (inputOperator){
+                case "+":{
+                let result = (input1)+(input2);
+                let display = document.querySelector(".display");
+                display.textContent = input + "="+result;
+                break;
+                }
+                case "-":{
+                let result = (input1)-(input2);
+                let display = document.querySelector(".display");
+                display.textContent = input + "="+result;
+                break;
+                }
+                case "*":{
+                let result = (input1)*(input2);
+                let display = document.querySelector(".display");
+                display.textContent = input + "="+result;
+                break;
+                }
+                case "/":{
+                if(input2==0){
+                    let result = "INFINITY"
+                }
+                else{
+                    result = (input1)/(input2);
+                }
+                let display = document.querySelector(".display");
+                display.textContent = input + "="+result;
+                break;
+                }
+                case "^":{
+                let result = Math.pow(input1,input2);
+                let display = document.querySelector(".display");
+                display.textContent = input + "="+result;
+                break;
+                }
+            }
+        }
+
+        let equalButton = document.querySelector(".equal");
+        equalButton.addEventListener('click',operate);
+
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Enter"){
+                operate();
+            }
+        })
+
+    </script>
+</html>
