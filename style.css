@@ -1,0 +1,43 @@
+.buttonsGrid{
+    display: grid;
+    grid-template: repeat(6,auto)/repeat(4,1fr);
+    position: absolute;
+    width : 20vw;
+    height: 50vh;
+    top: 50vh;
+    left: 50vw;
+    margin : -25vh auto auto -10vw;
+    border: 5px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: lightslategray;
+}
+button{
+    background-color : lightgray;
+    border: 2px solid gray;
+    border-radius: 5px;
+    font-size: large;
+}
+.display{
+    grid-area:1/1/2/5;
+    height: 15vh;
+    border: 2px solid black;
+    border-radius: 5px;
+    align-self: center;
+    background-color: white;
+    font-size: large;
+}
+@media (max-width: 500px){
+    .buttonsGrid{
+        width : 50vw;
+        height : 50vh;
+        margin : -25vh auto auto -25vw;
+    }
+}
+@media (max-width: 800px){
+    .buttonsGrid{
+        width : 34vw;
+        height : 50vh;
+        margin : -25vh auto auto -17vw;
+    }
+}
