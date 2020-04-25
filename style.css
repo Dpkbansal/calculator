@@ -2,42 +2,43 @@
     display: grid;
     grid-template: repeat(6,auto)/repeat(4,1fr);
     position: absolute;
-    width : 20vw;
-    height: 50vh;
+    width : 30vw;
+    height: 70vh;
     top: 50vh;
     left: 50vw;
-    margin : -25vh auto auto -10vw;
+    margin : -35vh auto auto -15vw;
     border: 5px solid black;
     border-radius: 5px;
     padding: 5px;
-    background-color: lightslategray;
+    background-color: black;
+    column-gap: 7px;
+    row-gap: 5px;
 }
 button{
-    background-color : lightgray;
-    border: 2px solid gray;
-    border-radius: 5px;
-    font-size: large;
+    background-color : rgb(53, 48, 48);
+    border: 0px;
+    border-radius: 30px;
+    font-size: xx-large;
+    color:white;
+    outline: none;
 }
 .display{
     grid-area:1/1/2/5;
-    height: 15vh;
-    border: 2px solid black;
-    border-radius: 5px;
+    display: flex;
+    height: 20vh;
+    border-bottom: 2px solid lightgray;
     align-self: center;
-    background-color: white;
-    font-size: large;
+    background-color:black;
+    font-size: xx-large;
+    color: white;
+    justify-content: flex-end;
 }
-@media (max-width: 500px){
-    .buttonsGrid{
-        width : 80vw;
-        height : 70vh;
-        margin : -35vh auto auto -40vw;
-    }
+.operator{
+    color : rgb(3, 187, 3);
 }
-@media (max-width: 800px){
-    .buttonsGrid{
-        width : 60vw;
-        height : 50vh;
-        margin : -25vh auto auto -30vw;
-    }
+.equal{
+    background-color: green;
+}
+.clear{
+    color:indianred;
 }
