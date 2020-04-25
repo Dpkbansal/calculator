@@ -145,9 +145,11 @@ let input = "";
 
         let divideButton = document.querySelector(".divide");
         divideButton.addEventListener('click',function(){
+            if(e.key == "/"){
             input1 = input;
             selectedOperator="/";
             input="";
+            }
         })
         window.addEventListener('keydown',function(e){
             if(e.key == "/"){
