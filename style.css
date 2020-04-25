@@ -1,124 +1,199 @@
-.buttonsGrid{
-    display: grid;
-    grid-template: repeat(6,1fr)/repeat(4,1fr);
-    position: absolute;
-    width : 20vw;
-    height: 70vh;
-    top: 50vh;
-    left: 50vw;
-    margin : -35vh auto auto -10vw;
-    border: 5px solid black;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: black;
-    column-gap: 7px;
-    row-gap: 5px;
-    grid-template-areas: 
-                    "display display display display"
-                    "clear power percentage divide"
-                    "seven eight nine multiply"
-                    "four five six subtract"
-                    "one two three add"
-                    "decimal zero back equal";
-}
-button{
-    background-color : rgb(53, 48, 48);
-    border: 0px;
-    border-radius: 30px;
-    font-size: xx-large;
-    color:white;
-    outline: none;
-}
-.display{
-    grid-area:display;
-    display: flex;
-    height: 20vh;
-    border-bottom: 2px solid lightgray;
-    align-self: center;
-    background-color:black;
-    font-size: xx-large;
-    color: white;
-    justify-content: flex-end;
-}
-.operator{
-    color : rgb(3, 187, 3);
-}
-.equal{
-    background-color: green;
-    grid-area:equal;
-}
-.clear{
-    color:indianred;
-    grid-area:clear;
-}
-.decimal{
-    grid-area:decimal;
-}
-.zero{
-    grid-area:zero;
-}
-.one{
-    grid-area:one
-}
-.two{
-    grid-area: two;
-}
-.three{
-    grid-area: three;
-}
-.four{
-    grid-area:four;
-}
-.five{
-    grid-area:five;
-}
-.six{
-    grid-area: six;
-}
-.seven{
-    grid-area:seven;
-}
-.eight{
-    grid-area:eight;
-}
-.nine{
-    grid-area:nine;
-}
-.power{
-    grid-area:power;
-}
-.percentage{
-    grid-area:percentage;
-}
-.divide{
-    grid-area:divide;
-}
-.multiply{
-    grid-area:multiply;
-}
-.add{
-    grid-area:add;
-}
-.subtract{
-    grid-area:subtract;
-}
-.back{
-    grid-area: back;
-}
-@media (max-width:450px){
-    .buttonsGrid{
-        display: grid;
-        position: absolute;
-        grid-template: repeat(6,1fr)/repeat(4,1fr);
-        width: 80vw;
-        height: 80vh;
-        margin:0;
-        left:8vw;
-        top:10vh;
-        right:0;
-        bottom: 0;
-    }
-    .display{
-        height:18vh;
-    }
-}
+let input = "";
+        let buttonsInput = document.querySelectorAll('button');
+        buttonsInput.forEach((button) => {
+            button.addEventListener('click',function(){
+                if(button.id>=0 && button.id<=9 || button.id =="."){
+                input += button.id;
+                let display = document.querySelector(".display");
+                display.textContent = input;
+                }
+            });
+        })
+      
+        window.addEventListener('keydown',function(e){
+            if(e.key>=0 && e.key<=9 || e.key =="."){
+                input += e.key;
+            }
+            else{
+                input = input;
+            }
+                let display = document.querySelector(".display");
+                display.textContent = input;
+        })
+
+        let buttonBackspace = document.querySelector(".back");
+        buttonBackspace.addEventListener('click',function(){
+            let inputArray = Array.from(input);
+            let splice = inputArray.splice((inputArray.length-1),1);
+            input = inputArray.join("");
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Backspace"){
+            let inputArray = Array.from(input);
+            let splice = inputArray.splice((inputArray.length-1),1);
+            input = inputArray.join("");
+            let display = document.querySelector(".display");
+            display.textContent = input;
+            }
+        })
+
+
+
+        let buttonClear = document.querySelector(".clear");
+        buttonClear.addEventListener('click',function(){
+            input="";
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Escape"){
+                input="";
+            }
+            let display = document.querySelector(".display");
+            display.textContent = input;
+        })
+
+        let input1 ="";
+        let input2="";
+        let selectedOperator = "";
+        function operate(input1,input2){
+            input2=input;
+            switch (selectedOperator){
+                case "+":{
+                    input = (parseFloat(input1)+parseFloat(input2));
+                    let display = document.querySelector(".display");
+                    display.textContent = input;
+                    console.log(input);
+                    input2="";
+                    break;
+                }
+                case "-":{
+                    input = (parseFloat(input1)-parseFloat(input2));
+                    let display = document.querySelector(".display");
+                    display.textContent = input;
+                    input2="";
+                    break;
+                }
+                case "*":{
+                    input = (parseFloat(input1)*parseFloat(input2));
+                    let display = document.querySelector(".display");
+                    display.textContent = input;
+                    input2="";
+                    break;
+                }
+                case "/":{
+                    input = ((parseFloat(input1))/(parseFloat(input2)));
+                    let display = document.querySelector(".display");
+                    display.textContent = input;
+                    input2="";
+                    break;
+                }
+                case "^":{
+                    input = Math.pow(parseFloat(input1),parseFloat(input2));
+                    let display = document.querySelector(".display");
+                    display.textContent = input;
+                    input2="";
+                    break;
+                }
+            }
+        }
+        let plusButton = document.querySelector(".add");
+        plusButton.addEventListener('click',function(){
+            input1 = input;
+            selectedOperator="+";
+            input="";
+                
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "+"){
+                input1 = input;
+                selectedOperator="+";
+                input="";
+            }
+        })
+
+        let subtractButton = document.querySelector(".subtract");
+        subtractButton.addEventListener('click',function(){
+            input1 = input;
+            selectedOperator="-";
+            input="";
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "-"){
+                input1 = input;
+                selectedOperator="-";
+                input="";
+            }
+        })
+
+        let multiplyButton = document.querySelector(".multiply");
+        multiplyButton.addEventListener('click',function(){
+            input1 = input;
+            selectedOperator="*";
+            input="";
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "*"){
+                input1 = input;
+                selectedOperator="*";
+                input="";
+            }
+        })
+
+        let divideButton = document.querySelector(".divide");
+        divideButton.addEventListener('click',function(){
+            input1 = input;
+            selectedOperator="/";
+            input="";
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "/"){
+                input1 = input;
+                selectedOperator="/";
+                input="";
+            }
+        })
+
+        let powerButton = document.querySelector(".power");
+        powerButton.addEventListener('click',function(){
+            input1 = input;
+            selectedOperator="/";
+            input="";
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "^"){
+                input1 = input;
+                selectedOperator="^";
+                input="";
+            }
+        })
+
+        let percentageButton = document.querySelector(".percentage");
+        percentageButton.addEventListener('click',function(){
+            input = (parseFloat(input))*(0.01);
+            let display = document.querySelector(".display");
+            display.textContent = input+"%";
+            input2="";
+        })
+        window.addEventListener('keydown',function(e){
+            if(e.key == "%"){
+                input = ((parseFloat(input))*(0.01)).toFixed(2);
+                let display = document.querySelector(".display");
+                display.textContent = input+"%";
+                input2="";
+            }
+        })
+
+        let equalButton = document.querySelector(".equal");
+        equalButton.addEventListener('click',function(){
+            operate(input1,input2);
+        });
+
+        window.addEventListener('keydown',function(e){
+            if(e.key == "Enter"){
+                operate(input1,input2);
+            }
+        })
